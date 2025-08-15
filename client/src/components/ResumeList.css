@@ -160,8 +160,44 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 30px;
+  padding: 0;
   border-bottom: 2px solid #e9ecef;
+  position: relative;
+}
+
+.resume-main-header {
+  background-color: #f0f0f0;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.resume-main-header h1 {
+  color: #495057;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .modal-header h2 {
@@ -195,6 +231,18 @@
   padding: 30px;
 }
 
+.resume-name {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.resume-name h2 {
+  color: #495057;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
 .resume-section {
   margin-bottom: 30px;
 }
@@ -205,6 +253,31 @@
   margin-bottom: 15px;
   padding-bottom: 8px;
   border-bottom: 2px solid #e9ecef;
+}
+
+.section-header {
+  background-color: #f0f0f0 !important;
+  color: #495057 !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+  padding: 10px 15px !important;
+  margin: 0 -30px 20px -30px !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+}
+
+.work-experience-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #667eea;
+}
+
+.work-experience-item p {
+  color: #6c757d;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
 }
 
 .contact-info p {

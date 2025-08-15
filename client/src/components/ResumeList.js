@@ -51,13 +51,23 @@ const ResumeList = () => {
     }
   };
 
-  const handleDownload = (id, name) => {
-    const link = document.createElement('a');
-    link.href = `/api/resumes/${id}/pdf`;
-    link.download = `${name.replace(/\s+/g, '_')}_Resume.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async (id, name) => {
+    try {
+      const response = await axios.get(`/api/resumes/${id}/pdf`, {
+        responseType: 'blob'
+      });
+      
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${name.replace(/\s+/g, '_')}_Resume.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setError('Failed to download PDF');
+    }
   };
 
   const formatDate = (dateString) => {
@@ -151,7 +161,9 @@ const ResumeList = () => {
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{selectedResume.name}</h2>
+              <div className="resume-main-header">
+                <h1>RESUME</h1>
+              </div>
               <button
                 className="modal-close"
                 onClick={() => setShowModal(false)}
@@ -161,8 +173,12 @@ const ResumeList = () => {
             </div>
             
             <div className="modal-body">
+              <div className="resume-name">
+                <h2>{selectedResume.name}</h2>
+              </div>
+              
               <div className="resume-section">
-                <h3>Contact Information</h3>
+                <h3 className="section-header">❖ Contact Information</h3>
                 <div className="contact-info">
                   {selectedResume.email && <p><strong>Email:</strong> {selectedResume.email}</p>}
                   {selectedResume.phone && <p><strong>Phone:</strong> {selectedResume.phone}</p>}
@@ -179,7 +195,7 @@ const ResumeList = () => {
 
               {selectedResume.skills && selectedResume.skills.length > 0 && (
                 <div className="resume-section">
-                  <h3>Skills</h3>
+                  <h3 className="section-header">❖ Skills</h3>
                   <div className="skills-display">
                     {selectedResume.skills.map((skill, index) => (
                       <span key={index} className="skill-tag">{skill}</span>
@@ -190,13 +206,13 @@ const ResumeList = () => {
 
               {selectedResume.education && selectedResume.education.length > 0 && (
                 <div className="resume-section">
-                  <h3>Education</h3>
+                  <h3 className="section-header">❖ Academic Details</h3>
                   {selectedResume.education.map((edu, index) => (
                     <div key={index} className="education-item">
                       <h4>{edu.institution}</h4>
                       <p><strong>{edu.degree}</strong> {edu.field && `in ${edu.field}`}</p>
-                      <p>{edu.start_date} - {edu.end_date}</p>
-                      {edu.gpa && <p>GPA: {edu.gpa}</p>}
+                      <p><strong>Duration:</strong> {edu.start_date} - {edu.end_date}</p>
+                      {edu.gpa && <p><strong>GPA:</strong> {edu.gpa}</p>}
                     </div>
                   ))}
                 </div>
@@ -204,11 +220,13 @@ const ResumeList = () => {
 
               {selectedResume.projects && selectedResume.projects.length > 0 && (
                 <div className="resume-section">
-                  <h3>Projects</h3>
+                  <h3 className="section-header">❖ Academic Project Undertaken</h3>
                   {selectedResume.projects.map((project, index) => (
                     <div key={index} className="project-item">
                       <h4>{project.title}</h4>
-                      <p>{project.description}</p>
+                      <p><strong>Company:</strong> {project.title}</p>
+                      <p><strong>Project Title:</strong> {project.title}</p>
+                      <p><strong>Profile:</strong> {project.description}</p>
                       {project.technologies && <p><strong>Technologies:</strong> {project.technologies}</p>}
                       {project.link && (
                         <p>
@@ -223,9 +241,19 @@ const ResumeList = () => {
                 </div>
               )}
 
+              <div className="resume-section">
+                <h3 className="section-header">❖ Work Experience</h3>
+                <div className="work-experience-item">
+                  <p><strong>Organization:</strong> [To be added]</p>
+                  <p><strong>Designation:</strong> [To be added]</p>
+                  <p><strong>Duration:</strong> [To be added]</p>
+                  <p><strong>Profile:</strong> [To be added]</p>
+                </div>
+              </div>
+
               {selectedResume.certificates && selectedResume.certificates.length > 0 && (
                 <div className="resume-section">
-                  <h3>Certificates</h3>
+                  <h3 className="section-header">❖ Certificates</h3>
                   {selectedResume.certificates.map((cert, index) => (
                     <div key={index} className="certificate-item">
                       <h4>{cert.name}</h4>
@@ -246,7 +274,7 @@ const ResumeList = () => {
 
               {selectedResume.hobbies && selectedResume.hobbies.length > 0 && (
                 <div className="resume-section">
-                  <h3>Hobbies & Interests</h3>
+                  <h3 className="section-header">❖ Hobbies & Interests</h3>
                   <div className="hobbies-display">
                     {selectedResume.hobbies.map((hobby, index) => (
                       <span key={index} className="hobby-tag">{hobby}</span>
