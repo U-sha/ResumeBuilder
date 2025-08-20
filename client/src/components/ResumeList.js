@@ -178,7 +178,7 @@ const ResumeList = () => {
               </div>
               
               <div className="resume-section">
-                <h3 className="section-header">❖ Contact Information</h3>
+                <h3 className="section-header"> Contact Information</h3>
                 <div className="contact-info">
                   {selectedResume.email && <p><strong>Email:</strong> {selectedResume.email}</p>}
                   {selectedResume.phone && <p><strong>Phone:</strong> {selectedResume.phone}</p>}
@@ -195,7 +195,7 @@ const ResumeList = () => {
 
               {selectedResume.skills && selectedResume.skills.length > 0 && (
                 <div className="resume-section">
-                  <h3 className="section-header">❖ Skills</h3>
+                  <h3 className="section-header"> Skills</h3>
                   <div className="skills-display">
                     {selectedResume.skills.map((skill, index) => (
                       <span key={index} className="skill-tag">{skill}</span>
@@ -206,7 +206,7 @@ const ResumeList = () => {
 
               {selectedResume.education && selectedResume.education.length > 0 && (
                 <div className="resume-section">
-                  <h3 className="section-header">❖ Academic Details</h3>
+                  <h3 className="section-header"> Education</h3>
                   {selectedResume.education.map((edu, index) => (
                     <div key={index} className="education-item">
                       <h4>{edu.institution}</h4>
@@ -220,7 +220,7 @@ const ResumeList = () => {
 
               {selectedResume.projects && selectedResume.projects.length > 0 && (
                 <div className="resume-section">
-                  <h3 className="section-header">❖ Academic Project Undertaken</h3>
+                  <h3 className="section-header"> Projects</h3>
                   {selectedResume.projects.map((project, index) => (
                     <div key={index} className="project-item">
                       <h4>{project.title}</h4>
@@ -242,7 +242,7 @@ const ResumeList = () => {
               )}
 
               <div className="resume-section">
-                <h3 className="section-header">❖ Work Experience</h3>
+                <h3 className="section-header"> Work Experience</h3>
                 <div className="work-experience-item">
                   <p><strong>Organization:</strong> [To be added]</p>
                   <p><strong>Designation:</strong> [To be added]</p>
@@ -253,7 +253,7 @@ const ResumeList = () => {
 
               {selectedResume.certificates && selectedResume.certificates.length > 0 && (
                 <div className="resume-section">
-                  <h3 className="section-header">❖ Certificates</h3>
+                  <h3 className="section-header"> Certificates</h3>
                   {selectedResume.certificates.map((cert, index) => (
                     <div key={index} className="certificate-item">
                       <h4>{cert.name}</h4>
@@ -274,7 +274,7 @@ const ResumeList = () => {
 
               {selectedResume.hobbies && selectedResume.hobbies.length > 0 && (
                 <div className="resume-section">
-                  <h3 className="section-header">❖ Hobbies & Interests</h3>
+                  <h3 className="section-header"> Hobbies & Interests</h3>
                   <div className="hobbies-display">
                     {selectedResume.hobbies.map((hobby, index) => (
                       <span key={index} className="hobby-tag">{hobby}</span>
